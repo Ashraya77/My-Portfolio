@@ -9,13 +9,13 @@ const navLinks = [
 
 const Navbar = () => {
   return (
-    <nav className="bg-#1e1e1e py-4 flex items-center justify-between sticky top-0 z-50 shadow-lg px-120">
-      <div className="flex gap-3">
+    <nav className="bg-slate-900 py-4 flex items-center justify-around sticky top-0 z-50 shadow-lg px-32 ">
+      <div className="flex gap-5">
        {navLinks.map((link) => (
           <a 
             key={link.name}
             href={link.href} 
-            className="text-purple-200 hover:text-white transition-colors duration-300 text-sm font-bold"
+            className="text-purple-200 hover:text-teal-200 transition-colors duration-300 text-sm font-bold"
           >
             {link.name}
           </a>
