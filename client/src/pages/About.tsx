@@ -46,7 +46,7 @@ const About = () => {
         <div className="flex items-center mb-12">
           {/* Heading Text */}
           <h2 className="text-3xl font-bold text-white whitespace-nowrap">
-            <span className="text-teal-200 mr-2">/</span>about me
+            <span className="text-white mr-2">/</span> about me
           </h2>
           {/* Inline Line that takes up remaining space */}
           <div className="ml-4 mt-3 w-130 h-[1px] bg-teal-200 opacity-30 rounded-full"></div>

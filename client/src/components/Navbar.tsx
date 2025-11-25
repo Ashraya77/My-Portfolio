@@ -15,7 +15,7 @@ const Navbar = () => {
           <a 
             key={link.name}
             href={link.href} 
-            className="text-purple-200 hover:text-teal-200 transition-colors duration-300 text-sm font-bold"
+            className="text-gray-300 hover:text-teal-200 transition-colors duration-300 text-sm font-bold"
           >
             {link.name}
           </a>
@@ -27,7 +27,7 @@ const Navbar = () => {
           href="https://github.com/Ashraya77" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="text-purple-300 hover:text-white transition-colors duration-300"
+          className="text-gray-300 hover:text-white transition-colors duration-300"
         >
           <Github size={20} />
         </a>
@@ -35,7 +35,7 @@ const Navbar = () => {
           href="https://linkedin.com" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="text-purple-300 hover:text-white transition-colors duration-300"
+          className="text-gray-300 hover:text-white transition-colors duration-300"
         >
           <Linkedin size={20} />
         </a>
@@ -43,13 +43,13 @@ const Navbar = () => {
           href="https://twitter.com" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="text-purple-300 hover:text-white transition-colors duration-300"
+          className="text-gray-300 hover:text-white transition-colors duration-300"
         >
           <Twitter size={20} />
         </a>
         <a 
-          href="mailto:your@email.com"
-          className="text-purple-300 hover:text-white transition-colors duration-300"
+          href="mailto:aashray851@email.com"
+          className="text-gray-300 hover:text-white transition-colors duration-300"
         >
           <Mail size={20} />
         </a>

@@ -13,7 +13,7 @@ return () => clearInterval(interval);
   }, []);
 
 return (
-<div className='min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4 space-y-6 font-sans'>
+<div className='min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4 space-y-3 font-sans'>
 
 
 {/* Main typing section - Larger, bold, tracking-tight for a clean, modern look */}
@@ -36,12 +36,14 @@ return (
 I'm a Fullstack Developer, focused on building high-impact, large-scale applications. I enjoy creating seamless digital experiences from frontend design to backend infrastructure.</p>
 
 {/* Button - Transparent background, clean border color, and a small icon */}
-<div className="pt-4">
-<button className='border-2 px-6 py-4 text-lg font-normal border-current text-teal-200 bg-transparent hover:bg-teal-800 transition duration-300'>
+<div className="pt-10">
+<a
+href="mailto:aashray851@email.com"
+className='border-2 px-6 py-4 text-lg font-normal border-current text-teal-200 bg-transparent hover:bg-teal-800 transition duration-300'>
     {/* Simple envelope icon for "Say hi" */}
     <span className="mr-2">✉️</span> 
     Say hi!
-</button>
+</a>
 </div>
 </div>
   );
