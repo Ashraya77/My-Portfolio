@@ -1,3 +1,4 @@
+import SideProjects from "../components/swipper/SideProjects"
 
 const Projects = () => {
    return (
@@ -16,6 +17,7 @@ const Projects = () => {
         </div>
 
       </div>
+        <SideProjects/>
     </div>
   )
 }

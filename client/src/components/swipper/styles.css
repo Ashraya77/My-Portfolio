@@ -1,0 +1,34 @@
+.mySwiper {
+  width: 70%;
+  height: 700px;
+}
+
+.slide-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-image {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.project-info {
+  padding: 20px;
+  text-align: center;
+}
+
+.project-info h3 {
+  margin: 10px 0;
+  font-size: 24px;
+}
+
+.project-info p {
+  color: #666;
+}
