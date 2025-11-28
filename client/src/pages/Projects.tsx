@@ -1,3 +1,4 @@
+import ProjectShowcase from "../components/ProjectShowcase"
 import SideProjects from "../components/swipper/SideProjects"
 
 const Projects = () => {
@@ -18,6 +19,7 @@ const Projects = () => {
 
       </div>
         <SideProjects/>
+        <ProjectShowcase/>
     </div>
   )
 }
