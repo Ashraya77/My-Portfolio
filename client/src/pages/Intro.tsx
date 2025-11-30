@@ -1,7 +1,7 @@
 // Intro.jsx (Strictly adhering to original theme, only adding Resume button)
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { FaDownload, FaEnvelope } from 'react-icons/fa'; // Added FaDownload and FaEnvelope
+import { FaDownload, FaEnvelope, FaArrowDown } from 'react-icons/fa'; // Added FaDownload, FaEnvelope, and FaArrowDown
 
 export default function Intro() {
   const text = "hi, Ashraya here.";
@@ -183,7 +183,7 @@ export default function Intro() {
       </p>
 
       {/* Button Group (Classy, dual CTA) */}
-      <div className="pt-10 flex space-x-6">
+      <div className="pt-10 flex flex-wrap justify-center gap-6">
         
         {/* Primary CTA (Say Hi!) - Slightly more prominent background */}
         <div className="relative" ref={menuRef}>
@@ -248,6 +248,27 @@ export default function Intro() {
           Download Resume
         </a>
       </div>
+
+      {/* Explore Button with Arrow - at the bottom */}
+      <motion.div
+        className="absolute bottom-20"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 1 }}
+      >
+        <button
+          onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}
+          className="flex flex-col items-center text-teal-400 hover:text-teal-300 transition duration-300 group"
+        >
+          <span className="text-sm font-medium mb-2 tracking-wider">EXPLORE</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <FaArrowDown className="text-2xl" />
+          </motion.div>
+        </button>
+      </motion.div>
     </div>
   );
 }
