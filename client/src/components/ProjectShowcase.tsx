@@ -1,8 +1,33 @@
 // components/ProjectShowcase.jsx
 import { useState } from 'react';
 
+// Icon for GitHub (Standard)
+const GitHubIcon = (props) => (
+  <svg 
+    className="w-5 h-5 group-hover/github:text-teal-400 transition-colors duration-300" 
+    fill="currentColor" 
+    viewBox="0 0 24 24"
+    {...props}
+  >
+    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+  </svg>
+);
+
+// Icon for Live Demo (Arrow Right)
+const ArrowRightIcon = (props) => (
+    <svg 
+        className="w-5 h-5 ml-1 transition-transform duration-300 group-hover/live:translate-x-1" 
+        fill="none" 
+        stroke="currentColor" 
+        viewBox="0 0 24 24"
+        {...props}
+    >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+    </svg>
+);
+
 const ProjectShowcase = () => {
-  const [projects, setProjects] = useState([
+  const [projects] = useState([
     {
       id: 1,
       title: "TDSB Homework Management Interface",
@@ -54,86 +79,93 @@ const ProjectShowcase = () => {
   ]);
 
   return (
-    <div className="py-12 bg-slate-900">
-      <div className="max-w-6xl mx-auto px-6 sm:px-12">
+    <div className="py-20 bg-slate-900 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Section Heading */}
-        <div className="flex items-center mb-12">
-          <h2 className="text-3xl font-bold text-white whitespace-nowrap">
-            <span className="text-white mr-2">/</span> project showcase
+        <div className="flex flex-col items-start mb-16">
+          <p className="text-teal-400 font-medium uppercase tracking-widest text-sm">
+            Recent Work
+          </p>
+          <h2 className="text-5xl font-extrabold text-white mt-3 border-l-4 border-teal-400 pl-4">
+            Creative Showcase
           </h2>
-          <div className="ml-4 mt-3 w-130 h-px bg-teal-200 opacity-30 rounded-full"></div>
         </div>
-
+        
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map(project => (
             <div 
               key={project.id} 
-              className="group bg-slate-800 rounded-2xl overflow-hidden transition-all duration-500 ease-out hover:bg-slate-750 hover:scale-105 hover:shadow-2xl hover:shadow-teal-500/10 h-90 relative"
+              // Card Style: Deeper inset background, very rounded corners, border with gradient potential on hover
+              className="group relative bg-slate-800 rounded-3xl p-px overflow-hidden 
+                         transition-all duration-500 ease-in-out transform hover:scale-[1.01] hover:shadow-xl hover:shadow-teal-500/15"
             >
-           
-              {/* Project Content */}
-              <div className="p-6 transform  transition-transform duration-500 relative z-10 h-full flex flex-col">
-                {/* Project Header */}
-                <div className="flex items-start justify-between mb-4 h-15">
+              {/* Floating Teal Accent (subtle visual interest) */}
+              <span className="absolute top-0 left-0 h-1/2 w-full bg-teal-400/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></span>
+
+              <div className="bg-slate-800 rounded-[calc(1.5rem-1px)] h-full flex flex-col p-6">
+                
+                {/* Header and Title */}
+                <div className="flex flex-col mb-4">
+                  {/* Subtle 'View' Indicator on Hover */}
+                  <span className="text-xs font-semibold uppercase text-teal-400 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    View Project
+                  </span>
                   
-                  <h3 className="text-xl font-bold text-white group-hover:text-teal-200 transition-colors duration-300 flex-1">
+                  <h3 className="text-2xl font-extrabold text-white group-hover:text-teal-300 transition-colors duration-300">
                     {project.title}
                   </h3>
                 </div>
 
                 {/* Description */}
-                <p className="text-slate-300 mb-4 text-sm leading-relaxed group-hover:text-slate-200 transition-colors duration-300 flex-1">
+                <p className="text-slate-400 text-base leading-relaxed mb-6 flex-1">
                   {project.description}
                 </p>
                 
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.map((tech, index) => (
+                {/* Technologies - Pill style with stronger contrast */}
+                <div className="flex flex-wrap gap-2 mt-auto pb-4">
+                  {project.technologies.slice(0, 3).map((tech, index) => (
                     <span 
                       key={index}
-                      className="px-3 py-1 bg-slate-700 text-teal-300 text-xs rounded-full group-hover:bg-slate-600 group-hover:text-teal-200 transition-all duration-300"
+                      className="text-xs font-medium px-3 py-1 bg-slate-700/70 text-teal-300 rounded-lg border border-slate-700
+                                 group-hover:bg-slate-700 transition-all duration-300 shadow-inner shadow-slate-900/10"
                     >
                       {tech}
                     </span>
                   ))}
+                  {project.technologies.length > 3 && (
+                    <span className="text-xs font-medium px-3 py-1 text-slate-500">
+                      +{project.technologies.length - 3} more
+                    </span>
+                  )}
                 </div>
-                
-                {/* Footer with GitHub and Deployed Link */}
-                <div className="flex justify-between items-center pt-4 border-t border-slate-700 group-hover:border-slate-600 transition-colors duration-300 mt-auto">
-                  {/* GitHub Link */}
+
+                {/* Footer with Links */}
+                <div className="flex justify-between items-center pt-5 border-t border-slate-700 mt-4">
+                  
+                  {/* GitHub Link - Subtle Text Link */}
                   <a 
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-slate-300 hover:text-white transition-all duration-300 group/github hover:scale-105"
+                    className="flex items-center gap-2 text-slate-500 hover:text-white transition-all duration-300 group/github p-2 -ml-2 rounded-lg"
                   >
-                    <svg 
-                      className="w-5 h-5 group-hover/github:text-teal-400 transition-colors duration-300" 
-                      fill="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    <span className="text-sm font-medium group-hover/github:translate-x-1 transition-transform duration-300">Code</span>
+                    <GitHubIcon className="group-hover/github:text-teal-400" />
+                    <span className="text-sm font-medium">Source Code</span>
                   </a>
                   
-                  {/* Deployed Project Link */}
+                  {/* Live Demo Button - Bolder CTA */}
                   <a 
                     href={project.deployedUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-teal-500/25 group/live"
+                    className="flex items-center px-5 py-2 bg-teal-600 text-white rounded-xl font-bold text-sm
+                               hover:bg-teal-500 transition-all duration-300 transform hover:scale-[1.03] 
+                               shadow-lg shadow-teal-600/40 group/live"
                   >
-                    <svg 
-                      className="w-4 h-4 group-hover/live:scale-110 transition-transform duration-300" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                    <span className="text-sm font-medium">Live Demo</span>
+                    Launch Demo
+                    <ArrowRightIcon />
                   </a>
                 </div>
               </div>

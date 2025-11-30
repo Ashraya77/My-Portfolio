@@ -1,9 +1,14 @@
-import { useState, useEffect } from "react";
+// Intro.jsx (Strictly adhering to original theme, only adding Resume button)
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { FaDownload, FaEnvelope } from 'react-icons/fa'; // Added FaDownload and FaEnvelope
 
 export default function Intro() {
   const text = "hi, Ashraya here.";
   const [displayText, setDisplayText] = useState("");
+  const [openMenu, setOpenMenu] = useState(false);
+  const menuRef = useRef(null);
+
 
   useEffect(() => {
     let i = 0;
@@ -14,11 +19,23 @@ export default function Intro() {
     }, 120);
     return () => clearInterval(interval);
   }, []);
+  
+  useEffect(() => {
+  function handleClickOutside(e) {
+    if (menuRef.current && !menuRef.current.contains(e.target)) {
+      setOpenMenu(false);
+    }
+  }
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
+
 
   return (
     <div className='min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4 space-y-3 font-sans relative overflow-hidden'>
       
-      {/* Coding/Laptop Animation */}
+      {/* Coding/Laptop Animation (Original Code - untouched) */}
       <div className="absolute top-60 w-full flex justify-center mb-8">
         <motion.div
           className="relative"
@@ -165,14 +182,70 @@ export default function Intro() {
         I'm a Fullstack Developer, focused on building high-impact, large-scale applications. I enjoy creating seamless digital experiences from frontend design to backend infrastructure.
       </p>
 
-      {/* Button */}
-      <div className="pt-10">
+      {/* Button Group (Classy, dual CTA) */}
+      <div className="pt-10 flex space-x-6">
+        
+        {/* Primary CTA (Say Hi!) - Slightly more prominent background */}
+        <div className="relative" ref={menuRef}>
+  <button
+    onClick={() => setOpenMenu(!openMenu)}
+    className='flex items-center px-6 py-3 text-lg font-semibold border-2 border-teal-400 text-white bg-teal-600 rounded-md shadow-lg hover:bg-teal-500 transition duration-300'
+  >
+    <FaEnvelope className="mr-3" />
+    Say Hi!
+  </button>
+
+  {openMenu && (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      className="absolute left-0 mt-3 w-56 bg-slate-800 border border-teal-500 rounded-lg shadow-xl p-3 space-y-3 z-50"
+    >
+      <a
+        href="mailto:aashray851@email.com"
+        className="flex items-center text-gray-200 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md transition"
+      >
+        📧 Email
+      </a>
+
+      <a
+        href="https://www.linkedin.com/in/aashray-roka-808158384/"
+        target="_blank"
+        className="flex items-center text-gray-200 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md transition"
+      >
+        🔗 LinkedIn
+      </a>
+
+      <a
+        href="https://instagram.com/aashrayya"
+        target="_blank"
+        className="flex items-center text-gray-200 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md transition"
+      >
+        📸 Instagram
+      </a>
+
+      <a
+        href="https://github.com/Ashraya77"
+        target="_blank"
+        className="flex items-center text-gray-200 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md transition"
+      >
+        💻 GitHub
+      </a>
+    </motion.div>
+  )}
+</div>
+
+
+        
+        {/* Secondary CTA (Download Resume) - Transparent/Outline Style */}
         <a
-          href="mailto:aashray851@email.com"
-          className='border-2 px-6 py-4 text-lg font-normal border-current text-teal-200 bg-transparent hover:bg-teal-800 transition duration-300'
+          href="/your-resume.pdf" // **IMPORTANT: Update this path to your actual PDF file!**
+          download
+          className='flex items-center px-6 py-3 text-lg font-normal border-2 border-teal-400 text-teal-200 bg-transparent rounded-md hover:bg-teal-900/50 transition duration-300'
         >
-          <span className="mr-2">✉️</span> 
-          Say hi!
+          <FaDownload className="mr-3" /> 
+          Download Resume
         </a>
       </div>
     </div>
