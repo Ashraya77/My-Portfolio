@@ -13,19 +13,16 @@ export default function SideProjects() {
       id: 1,
       image: 'ss.png',
       title: 'Project 1',
-      description: 'Description of project 1'
     },
     {
       id: 2,
       image: 'ss.png',
       title: 'Project 2',
-      description: 'Description of project 2'
     },
     {
       id: 3,
       image: 'ss.png',
       title: 'Project 3',
-      description: 'Description of project 3'
     },
     // Add more projects as needed
   ];
@@ -54,8 +51,7 @@ export default function SideProjects() {
                 className="project-image"
               />
               <div className="project-info">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
+                <h3 className='text-gray-500'>{project.title}</h3>
               </div>
             </div>
           </SwiperSlide>

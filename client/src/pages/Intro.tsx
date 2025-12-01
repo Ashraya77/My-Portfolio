@@ -1,15 +1,29 @@
-// Intro.jsx (Strictly adhering to original theme, only adding Resume button)
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { FaDownload, FaEnvelope, FaArrowDown } from 'react-icons/fa'; // Added FaDownload, FaEnvelope, and FaArrowDown
+import { FaDownload, FaEnvelope, FaArrowDown, FaBars, FaTimes, FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
 
 export default function Intro() {
   const text = "hi, Ashraya here.";
   const [displayText, setDisplayText] = useState("");
+  // openMenu controls the visibility of the single dropdown menu
   const [openMenu, setOpenMenu] = useState(false);
-  const menuRef = useRef(null);
+  
+  // Ref for the single dropdown menu container
+  const menuRef = useRef(null); 
+  // Ref for the mobile hamburger button (top-left)
+  const mobileButtonRef = useRef(null); 
+  // Ref for the desktop 'Say Hi!' button (center-aligned)
+  const desktopButtonRef = useRef(null);
 
+  // --- Social Link Data (for clean mapping) ---
+  const socialLinks = [
+    { name: 'Email', href: 'mailto:aashray851@email.com', icon: FaEnvelope, color: 'text-red-400' },
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/aashray-roka-808158384/', icon: FaLinkedin, color: 'text-blue-400' },
+    { name: 'Instagram', href: 'https://instagram.com/aashrayya', icon: FaInstagram, color: 'text-pink-400' },
+    { name: 'GitHub', href: 'https://github.com/Ashraya77', icon: FaGithub, color: 'text-gray-400' },
+  ];
 
+  // Typing Effect
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
@@ -20,23 +34,43 @@ export default function Intro() {
     return () => clearInterval(interval);
   }, []);
   
+  // Click Outside Handler for Unified Menu
   useEffect(() => {
-  function handleClickOutside(e) {
-    if (menuRef.current && !menuRef.current.contains(e.target)) {
-      setOpenMenu(false);
+    function handleClickOutside(e) {
+      if (!openMenu) return;
+
+      const clickedButton = e.target === mobileButtonRef.current || e.target === desktopButtonRef.current || 
+                            mobileButtonRef.current?.contains(e.target) || desktopButtonRef.current?.contains(e.target);
+      
+      const clickedMenu = menuRef.current?.contains(e.target);
+
+      // Close the menu if the click is neither on the button nor inside the menu
+      if (!clickedButton && !clickedMenu) {
+         setOpenMenu(false);
+      }
     }
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [openMenu]); 
+
+  const handleExploreScroll = () => {
+    window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+  };
+  
+  // Function to open/close the menu
+  const handleMenuToggle = (e) => {
+    e.stopPropagation(); 
+    setOpenMenu(prev => !prev);
   }
 
-  document.addEventListener("mousedown", handleClickOutside);
-  return () => document.removeEventListener("mousedown", handleClickOutside);
-}, []);
-
-
   return (
-    <div className='min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4 space-y-3 font-sans relative overflow-hidden'>
+    <div className='min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4 sm:p-8 font-sans relative overflow-visible z-10'>
       
-      {/* Coding/Laptop Animation (Original Code - untouched) */}
-      <div className="absolute top-60 w-full flex justify-center mb-8">
+    
+
+      {/* Coding/Laptop Animation (Unchanged) */}
+      <div className="absolute top-[22vh] sm:top-[25vh] md:top-[28vh] w-full flex justify-center">
         <motion.div
           className="relative"
           initial={{ y: -20, opacity: 0 }}
@@ -65,7 +99,6 @@ export default function Intro() {
           >
             {/* Screen Content - Code Editor */}
             <div className="p-2 h-full bg-gray-900 rounded-t">
-              {/* Code Lines */}
               <motion.div
                 className="text-xs font-mono text-green-400 space-y-1"
                 initial={{ opacity: 0 }}
@@ -163,7 +196,7 @@ export default function Intro() {
       </div>
 
       {/* Main typing section */}
-      <div className="flex items-center mt-32"> 
+      <div className="flex items-center mt-40 sm:mt-52 md:mt-32 lg:mt-20">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">
           {displayText}
         </h1>
@@ -173,7 +206,7 @@ export default function Intro() {
       </div>
 
       {/* Subtitle */}
-      <h2 className="text-xl sm:text-2xl md:text-3xl text-gray-400 font-medium text-center tracking-tight">
+      <h2 className="text-xl sm:text-2xl md:text-3xl text-gray-400 font-medium text-center tracking-tight mt-2">
         I create stuff sometimes.
       </h2>
 
@@ -182,67 +215,31 @@ export default function Intro() {
         I'm a Fullstack Developer, focused on building high-impact, large-scale applications. I enjoy creating seamless digital experiences from frontend design to backend infrastructure.
       </p>
 
-      {/* Button Group (Classy, dual CTA) */}
-      <div className="pt-10 flex flex-wrap justify-center gap-6">
+      {/* Button Group */}
+      <div className="mt-8 pt-4 flex flex-wrap justify-center gap-4 sm:gap-6">
         
-        {/* Primary CTA (Say Hi!) - Slightly more prominent background */}
-        <div className="relative" ref={menuRef}>
-  <button
-    onClick={() => setOpenMenu(!openMenu)}
-    className='flex items-center px-6 py-3 text-lg font-semibold border-2 border-teal-400 text-white bg-teal-600 rounded-md shadow-lg hover:bg-teal-500 transition duration-300'
-  >
-    <FaEnvelope className="mr-3" />
-    Say Hi!
-  </button>
-
-  {openMenu && (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      className="absolute left-0 mt-3 w-56 bg-slate-800 border border-teal-500 rounded-lg shadow-xl p-3 space-y-3 z-50"
-    >
-      <a
-        href="mailto:aashray851@email.com"
-        className="flex items-center text-gray-200 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md transition"
-      >
-        📧 Email
-      </a>
-
-      <a
-        href="https://www.linkedin.com/in/aashray-roka-808158384/"
-        target="_blank"
-        className="flex items-center text-gray-200 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md transition"
-      >
-        🔗 LinkedIn
-      </a>
-
-      <a
-        href="https://instagram.com/aashrayya"
-        target="_blank"
-        className="flex items-center text-gray-200 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md transition"
-      >
-        📸 Instagram
-      </a>
-
-      <a
-        href="https://github.com/Ashraya77"
-        target="_blank"
-        className="flex items-center text-gray-200 hover:text-white hover:bg-slate-700 px-3 py-2 rounded-md transition"
-      >
-        💻 GitHub
-      </a>
-    </motion.div>
-  )}
-</div>
-
-
+        {/* 2. DESKTOP TRIGGER (Say Hi!) */}
+        <div className="relative hidden sm:block">
+          <button
+            ref={desktopButtonRef} // Attach ref for click outside
+            onClick={handleMenuToggle}
+            className={`flex items-center px-4 py-2 text-base sm:px-6 sm:py-3 sm:text-lg font-semibold border-2 border-teal-400 text-white rounded-md shadow-lg transition duration-300 ${
+              openMenu ? 'bg-teal-500' : 'bg-teal-600 hover:bg-teal-500'
+            }`}
+          >
+            <FaEnvelope className="mr-3" />
+            Say Hi!
+          </button>
+        </div>
         
-        {/* Secondary CTA (Download Resume) - Transparent/Outline Style */}
+        {/* 3. UNIFIED DROPDOWN MENU */}
+       
+        
+        {/* Secondary CTA (Download Resume) */}
         <a
-          href="/your-resume.pdf" // **IMPORTANT: Update this path to your actual PDF file!**
+          href="/your-resume.pdf"
           download
-          className='flex items-center px-6 py-3 text-lg font-normal border-2 border-teal-400 text-teal-200 bg-transparent rounded-md hover:bg-teal-900/50 transition duration-300'
+          className='flex items-center px-4 py-2 text-base sm:px-6 sm:py-3 sm:text-lg font-normal border-2 border-teal-400 text-teal-200 bg-transparent rounded-md hover:bg-teal-900/50 transition duration-300'
         >
           <FaDownload className="mr-3" /> 
           Download Resume
@@ -251,21 +248,21 @@ export default function Intro() {
 
       {/* Explore Button with Arrow - at the bottom */}
       <motion.div
-        className="absolute bottom-20"
+        className="absolute bottom-10 sm:bottom-20 z-0" 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 1 }}
       >
         <button
-          onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}
+          onClick={handleExploreScroll}
           className="flex flex-col items-center text-teal-400 hover:text-teal-300 transition duration-300 group"
         >
           <span className="text-sm font-medium mb-2 tracking-wider">EXPLORE</span>
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
           >
-            <FaArrowDown className="text-2xl" />
+            <FaArrowDown className="text-2xl group-hover:text-3xl transition-all duration-300" />
           </motion.div>
         </button>
       </motion.div>

@@ -8,6 +8,38 @@ const navLinks = [
   { name: "Projects", href: "#projects" },
 ];
 
+// Define social links separately for re-use
+const socialLinks = [
+  { 
+    icon: Github, 
+    href: "https://github.com/Ashraya77", 
+    target: "_blank", 
+    rel: "noopener noreferrer",
+    name: "Github"
+  },
+  { 
+    icon: Linkedin, 
+    href: "https://linkedin.com", 
+    target: "_blank", 
+    rel: "noopener noreferrer",
+    name: "Linkedin"
+  },
+  { 
+    icon: Twitter, 
+    href: "https://twitter.com", 
+    target: "_blank", 
+    rel: "noopener noreferrer",
+    name: "Twitter"
+  },
+  { 
+    icon: Mail, 
+    href: "mailto:aashray851@email.com",
+    target: "_self", // Mailto links typically don't need a new tab
+    rel: "",
+    name: "Mail"
+  },
+];
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
@@ -28,7 +60,7 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* --- RIGHT: Social Links --- */}
+        {/* --- RIGHT: Social Links (Desktop) --- */}
         <div className="flex gap-4">
           <a href="https://github.com/Ashraya77" target="_blank" rel="noopener noreferrer"
              className="text-gray-300 hover:text-white transition-colors duration-300">
@@ -59,10 +91,11 @@ const Navbar = () => {
 
       {/* --- MOBILE MENU DROPDOWN --- */}
       <div
-        className={`md:hidden flex flex-col gap-4 mt-4 overflow-hidden transition-all duration-300 ${
-          open ? "max-h-60" : "max-h-0"
+        className={`md:hidden flex flex-col gap-4 mt-4 overflow-hidden transition-all duration-300 px-8 ${
+          open ? "max-h-96 py-4" : "max-h-0"
         }`}
       >
+        {/* Navigation Links */}
         {navLinks.map((link) => (
           <a
             key={link.name}
@@ -73,6 +106,28 @@ const Navbar = () => {
             {link.name}
           </a>
         ))}
+
+        {/* Say Hi Section */}
+        <div className="pt-2 border-t border-slate-700 mt-2">
+            <h3 className="text-sm font-bold text-teal-200 mb-3">Say Hi 👋</h3>
+            <div className="flex gap-5 justify-start">
+                {socialLinks.map((social) => {
+                    const Icon = social.icon;
+                    return (
+                        <a 
+                            key={social.name}
+                            href={social.href} 
+                            target={social.target} 
+                            rel={social.rel}
+                            onClick={() => setOpen(false)}
+                            className="text-gray-300 hover:text-teal-200 transition-colors duration-300"
+                        >
+                            <Icon size={24} />
+                        </a>
+                    );
+                })}
+            </div>
+        </div>
       </div>
     </nav>
   );
