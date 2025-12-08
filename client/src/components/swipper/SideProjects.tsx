@@ -11,19 +11,15 @@ export default function SideProjects() {
   const projects = [
     {
       id: 1,
-      image: 'ss.png',
-      title: 'Project 1',
+      image: 'ss1.png',
+      title: 'Solution Computer House',
     },
     {
       id: 2,
-      image: 'ss.png',
-      title: 'Project 2',
+      image: 'ss2.png',
+      title: 'Hotel Forest',
     },
-    {
-      id: 3,
-      image: 'ss.png',
-      title: 'Project 3',
-    },
+    
     // Add more projects as needed
   ];
 

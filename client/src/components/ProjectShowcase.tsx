@@ -30,52 +30,21 @@ const ProjectShowcase = () => {
   const [projects] = useState([
     {
       id: 1,
-      title: "TDSB Homework Management Interface",
+      title: "Solution Computer House",
       description: "An application created for Toronto District School Board, with a Flask back-end and a Vue front-end.",
-      technologies: ["Python (Flask)", "Vue.js", "Bootstrap", "SQL"],
+      technologies: ["Nextjs", "Expressjs", "Tailwind", "MongoDB"],
       githubUrl: "https://github.com/username/tdsb-homework",
       deployedUrl: "https://tdsb-homework-app.vercel.app"
     },
     {
       id: 2,
-      title: "E-Commerce Platform",
+      title: "Hotel Forest",
       description: "A full-stack e-commerce solution with React, Node.js, and MongoDB. Features user authentication, payment processing, and admin dashboard.",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+      technologies: ["Nextjs", "Taiwind"],
       githubUrl: "https://github.com/username/ecommerce-platform",
       deployedUrl: "https://ecommerce-platform-demo.netlify.app"
     },
-    {
-      id: 3,
-      title: "Task Management App",
-      description: "A productivity application for managing daily tasks with drag-and-drop functionality and team collaboration features.",
-      technologies: ["React", "Firebase", "Tailwind CSS"],
-      githubUrl: "https://github.com/username/task-manager",
-      deployedUrl: "https://taskmanager-app.herokuapp.com"
-    },
-    {
-      id: 4,
-      title: "Weather Dashboard",
-      description: "Real-time weather application with location-based forecasts and interactive data visualization.",
-      technologies: ["JavaScript", "API Integration", "Chart.js"],
-      githubUrl: "https://github.com/username/weather-dashboard",
-      deployedUrl: "https://weather-dashboard-app.vercel.app"
-    },
-    {
-      id: 5,
-      title: "Portfolio Website",
-      description: "A responsive portfolio website with dark/light mode toggle and smooth animations.",
-      technologies: ["Next.js", "Framer Motion", "CSS3"],
-      githubUrl: "https://github.com/username/portfolio",
-      deployedUrl: "https://myportfolio-site.com"
-    },
-    {
-      id: 6,
-      title: "Chat Application",
-      description: "Real-time messaging application with rooms, file sharing, and emoji reactions.",
-      technologies: ["Socket.io", "React", "Express"],
-      githubUrl: "https://github.com/username/chat-app",
-      deployedUrl: "https://realtime-chat-app.herokuapp.com"
-    }
+      
   ]);
 
   return (
@@ -95,24 +64,22 @@ const ProjectShowcase = () => {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map(project => (
-            <div 
+            <a 
               key={project.id} 
-              // Card Style: Deeper inset background, very rounded corners, border with gradient potential on hover
-              className="group relative bg-slate-800 rounded-3xl p-px overflow-hidden 
-                         transition-all duration-500 ease-in-out transform hover:scale-[1.01] hover:shadow-xl hover:shadow-teal-500/15"
+              href={project.deployedUrl} // Make the entire card a link
+              target="_blank"
+              rel="noopener noreferrer"
+              // REVISED CARD STYLE: Smooth lift effect on hover (translate-y-1) and background shift.
+              className="group block bg-slate-800 rounded-xl p-6 h-full 
+                         transition-all duration-300 ease-in-out 
+                         hover:bg-slate-700/50 hover:-translate-y-1 hover:shadow-2xl hover:shadow-slate-700/40"
             >
-              {/* Floating Teal Accent (subtle visual interest) */}
-              <span className="absolute top-0 left-0 h-1/2 w-full bg-teal-400/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></span>
-
-              <div className="bg-slate-800 rounded-[calc(1.5rem-1px)] h-full flex flex-col p-6">
+              <div className="h-full flex flex-col">
                 
                 {/* Header and Title */}
                 <div className="flex flex-col mb-4">
-                  {/* Subtle 'View' Indicator on Hover */}
-                  <span className="text-xs font-semibold uppercase text-teal-400 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    View Project
-                  </span>
                   
+                  {/* Title */}
                   <h3 className="text-2xl font-extrabold text-white group-hover:text-teal-300 transition-colors duration-300">
                     {project.title}
                   </h3>
@@ -123,13 +90,13 @@ const ProjectShowcase = () => {
                   {project.description}
                 </p>
                 
-                {/* Technologies - Pill style with stronger contrast */}
+                {/* Technologies - Clean pills with clear text contrast */}
                 <div className="flex flex-wrap gap-2 mt-auto pb-4">
                   {project.technologies.slice(0, 3).map((tech, index) => (
                     <span 
                       key={index}
-                      className="text-xs font-medium px-3 py-1 bg-slate-700/70 text-teal-300 rounded-lg border border-slate-700
-                                 group-hover:bg-slate-700 transition-all duration-300 shadow-inner shadow-slate-900/10"
+                      className="text-xs font-medium px-3 py-1 bg-slate-700 text-teal-300 rounded-full border border-slate-600
+                                 transition-colors duration-300"
                     >
                       {tech}
                     </span>
@@ -142,34 +109,32 @@ const ProjectShowcase = () => {
                 </div>
 
                 {/* Footer with Links */}
+                {/* Removed the separate button/link structure and made the entire card the link to the demo. 
+                    The GitHub link remains separate for a secondary action. */}
                 <div className="flex justify-between items-center pt-5 border-t border-slate-700 mt-4">
                   
-                  {/* GitHub Link - Subtle Text Link */}
+                  {/* GitHub Link - Subtle Secondary Link */}
                   <a 
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-slate-500 hover:text-white transition-all duration-300 group/github p-2 -ml-2 rounded-lg"
+                    onClick={(e) => e.stopPropagation()} // Prevent card link from being triggered
+                    className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors duration-300 group/github"
                   >
                     <GitHubIcon className="group-hover/github:text-teal-400" />
                     <span className="text-sm font-medium">Source Code</span>
                   </a>
                   
-                  {/* Live Demo Button - Bolder CTA */}
-                  <a 
-                    href={project.deployedUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center px-5 py-2 bg-teal-600 text-white rounded-xl font-bold text-sm
-                               hover:bg-teal-500 transition-all duration-300 transform hover:scale-[1.03] 
-                               shadow-lg shadow-teal-600/40 group/live"
+                  {/* Indicator that the card itself is the primary CTA */}
+                  <span
+                    className="flex items-center text-sm font-semibold text-teal-400 group-hover:text-teal-300 transition-colors duration-300"
                   >
-                    Launch Demo
-                    <ArrowRightIcon />
-                  </a>
+                    View Demo
+                    <ArrowRightIcon className="w-4 h-4" />
+                  </span>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
