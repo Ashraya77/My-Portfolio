@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { FaDownload, FaEnvelope, FaArrowDown, FaBars, FaTimes, FaLinkedin, FaGithub, FaInstagram, FaStackOverflow, FaGlobe } from 'react-icons/fa';
+import { FaDownload, FaEnvelope, FaArrowDown, FaTimes, FaLinkedin, FaGithub, FaInstagram, FaStackOverflow, FaGlobe } from 'react-icons/fa';
 
 export default function Intro() {
   const text = "hi, Ashraya here.";

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // Icon for GitHub (Standard)
-const GitHubIcon = (props) => (
+const GitHubIcon = (props: any) => (
   <svg 
     className="w-5 h-5 group-hover/github:text-teal-400 transition-colors duration-300" 
     fill="currentColor" 
@@ -14,7 +14,7 @@ const GitHubIcon = (props) => (
 );
 
 // Icon for Live Demo (Arrow Right)
-const ArrowRightIcon = (props) => (
+const ArrowRightIcon = (props: any) => (
     <svg 
         className="w-5 h-5 ml-1 transition-transform duration-300 group-hover/live:translate-x-1" 
         fill="none" 
