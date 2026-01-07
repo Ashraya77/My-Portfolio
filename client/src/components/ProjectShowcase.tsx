@@ -44,6 +44,16 @@ const ProjectShowcase = () => {
       githubUrl: "https://github.com/Ashraya77/Hotel-Forest1",
       deployedUrl: "https://ecommerce-platform-demo.netlify.app"
     },
+      {
+      id: 3,
+      title: "Hotel Forest",
+      description: "A full-stack webapp with Nestjs, Node.js, and MongoDB. Features user authentication, payment processing, and admin dashboard.",
+      technologies: ["Nextjs", "Taiwind"],
+      githubUrl: "https://github.com/TIWARIANKIT10/Void-Innovation",
+      deployedUrl: "https://void-innovation.vercel.app/"
+    },
+    
+    
       
   ]);
 
