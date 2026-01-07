@@ -35,7 +35,7 @@ const About = () => {
   }, []);
 
   // Placeholder image URL using colors close to the new scheme (slate-900 background and teal-200 text)
-  const profileImageUrl = "https://placehold.co/400x400/0f172a/99f6e4?text=Your+Profile+Picture";
+  const profileImageUrl = "profile.png";
   
   return (
     <div className={` bg-slate-900 p-6 sm:p-12 font-sans`}>

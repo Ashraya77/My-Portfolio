@@ -33,7 +33,7 @@ const ProjectShowcase = () => {
       title: "Solution Computer House",
       description: "An application created for Toronto District School Board, with a Flask back-end and a Vue front-end.",
       technologies: ["Nextjs", "Expressjs", "Tailwind", "MongoDB"],
-      githubUrl: "https://github.com/username/tdsb-homework",
+      githubUrl: "https://github.com/Ashraya77/SolutionComputerHouse",
       deployedUrl: "https://tdsb-homework-app.vercel.app"
     },
     {
@@ -41,7 +41,7 @@ const ProjectShowcase = () => {
       title: "Hotel Forest",
       description: "A full-stack e-commerce solution with React, Node.js, and MongoDB. Features user authentication, payment processing, and admin dashboard.",
       technologies: ["Nextjs", "Taiwind"],
-      githubUrl: "https://github.com/username/ecommerce-platform",
+      githubUrl: "https://github.com/Ashraya77/Hotel-Forest1",
       deployedUrl: "https://ecommerce-platform-demo.netlify.app"
     },
       

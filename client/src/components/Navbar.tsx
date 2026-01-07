@@ -19,7 +19,7 @@ const socialLinks = [
   },
   { 
     icon: Linkedin, 
-    href: "https://linkedin.com", 
+    href: "https://linkedin.com/Ashraya", 
     target: "_blank", 
     rel: "noopener noreferrer",
     name: "Linkedin"
